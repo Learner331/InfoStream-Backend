@@ -1,4 +1,5 @@
 const { User } = require("../../models/user");
+const {validateToken} = require("../../services/auth")
 
 // Handle creating a new user
 const handleCreateNewUser = async (req, res) => {
@@ -50,4 +51,17 @@ const handleLoginUser = async (req, res) => {
   }
 };
 
-module.exports = { handleLoginUser, handleCreateNewUser };
+const TokenValidator = (req, res) => {
+
+  const {token} = req.body;
+
+  if (!token) {
+    return res.status(401).json({ message: "Token is required" });
+  }
+
+  const payload = validateToken(token);
+
+  return res.status(200).json({payload, msg: "Token is valid" });
+}
+
+module.exports = { handleLoginUser, handleCreateNewUser, TokenValidator };
