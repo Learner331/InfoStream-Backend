@@ -43,6 +43,8 @@ const handleLoginUser = async (req, res) => {
     // Authenticate user and generate token
     const token = await User.matchPasswordAndGenerateToken(email, password);
     console.log("Login successful, token generated:", token);
+    const data = await User.find({email: email});
+    console.log("User data:", data);
 
     return res.status(200).json({ token, msg: "Login successful" });
   } catch (error) {
