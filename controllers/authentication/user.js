@@ -53,7 +53,7 @@ const handleLoginUser = async (req, res) => {
 
 const TokenValidator = (req, res) => {
 
-  const {token} = req.body;
+  const token = req.headers['token'];
 
   if (!token) {
     return res.status(401).json({ message: "Token is required" });
