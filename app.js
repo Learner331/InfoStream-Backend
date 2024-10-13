@@ -13,6 +13,9 @@ const PORT = process.env.PORT || 5050;
 // Middleware to parse JSON request body
 app.use(bodyParser.json());
 
+const cors = require('cors');
+app.use(cors());
+
 // Connection
 connectMongoDB(process.env.MONGO_URL).then(() => {
   console.log("MongoDB connected!");
