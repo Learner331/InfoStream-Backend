@@ -52,16 +52,15 @@ const handleLoginUser = async (req, res) => {
 };
 
 const TokenValidator = (req, res) => {
-
-  const token = req.headers['token'];
-
+  const token = req.headers['x-access-token'];  // Extract token from custom header
+  
   if (!token) {
     return res.status(401).json({ message: "Token is required" });
   }
 
-  const payload = validateToken(token);
-
-  return res.status(200).json({payload, msg: "Token is valid" });
-}
+  const payload = validateToken(token);  // Assume validateToken function checks token validity
+  
+  return res.status(200).json({ payload, msg: "Token is valid" });
+};
 
 module.exports = { handleLoginUser, handleCreateNewUser, TokenValidator };
