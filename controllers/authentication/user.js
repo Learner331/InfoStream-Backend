@@ -52,7 +52,7 @@ const handleLoginUser = async (req, res) => {
 };
 
 const TokenValidator = (req, res) => {
-  const token = req.headers['x-access-token'];  // Extract token from custom header
+  const token = req.headers['token'];  // Extract token from custom header
   
   if (!token) {
     return res.status(401).json({ message: "Token is required" });
